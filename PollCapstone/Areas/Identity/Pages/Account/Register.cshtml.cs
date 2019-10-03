@@ -92,7 +92,7 @@ namespace PollCapstone.Areas.Identity.Pages.Account
                 {
                     if (user.Role == "PollMaker")
                     {
-                        await _userManager.AddToRoleAsync(user, StaticDetails.PollMaker);
+                        //await _userManager.AddToRoleAsync(user, StaticDetails.PollMaker);
                         return RedirectToAction("Create", "Pollmakers", new { id = user.Id });
                     }
                     if (user.Role == "PollTaker")

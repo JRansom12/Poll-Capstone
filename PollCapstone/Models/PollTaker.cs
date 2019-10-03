@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,14 +7,17 @@ using System.Threading.Tasks;
 
 namespace PollCapstone.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class PollTaker
     {
+        [Key]
+        public int TakerId { get; set; }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [NotMapped]
-        public bool IsSuperAdmin { get; set; }
-        public string Role { get; internal set; }
+        public string Gender { get; set; }
+        public int Age { get; set; }
+        [ForeignKey("User Id")]
+        public string ApplicationUserId { get; set; }
     }
 }

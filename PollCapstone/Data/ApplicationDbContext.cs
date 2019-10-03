@@ -14,5 +14,11 @@ namespace PollCapstone.Data
         {
         }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+        public DbSet<PollMaker> PollMaker { get; set; }
+
+        public DbSet<PollTaker> PollTaker { get; set; }
+
+        public DbSet<PickOnePoll> PickOnePoll { get; set; }
     }
 }

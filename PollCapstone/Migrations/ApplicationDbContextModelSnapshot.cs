@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PollCapstone.Data;
 
-namespace PollCapstone.Data.Migrations
+namespace PollCapstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191003144345_InitialMigration")]
-    partial class InitialMigration
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,6 +183,73 @@ namespace PollCapstone.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("PollCapstone.Models.PickOnePoll", b =>
+                {
+                    b.Property<int>("PickOneId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsPublic");
+
+                    b.Property<string>("MakerId");
+
+                    b.Property<int>("NumberOfChoices");
+
+                    b.Property<DateTime>("PollCompletionDate");
+
+                    b.Property<string>("PollName");
+
+                    b.Property<DateTime>("PollStartDate");
+
+                    b.Property<string>("PollingStatus");
+
+                    b.HasKey("PickOneId");
+
+                    b.ToTable("PickOnePoll");
+                });
+
+            modelBuilder.Entity("PollCapstone.Models.PollMaker", b =>
+                {
+                    b.Property<int>("MakerId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age");
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("LastName");
+
+                    b.HasKey("MakerId");
+
+                    b.ToTable("PollMaker");
+                });
+
+            modelBuilder.Entity("PollCapstone.Models.PollTaker", b =>
+                {
+                    b.Property<int>("TakerId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age");
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("LastName");
+
+                    b.HasKey("TakerId");
+
+                    b.ToTable("PollTaker");
                 });
 
             modelBuilder.Entity("PollCapstone.Models.ApplicationUser", b =>
