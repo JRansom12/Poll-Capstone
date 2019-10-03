@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PollCapstone.Models;
 
 namespace PollCapstone.Data
 {
@@ -12,5 +13,6 @@ namespace PollCapstone.Data
             : base(options)
         {
         }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }
