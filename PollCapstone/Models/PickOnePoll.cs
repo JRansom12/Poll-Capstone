@@ -17,6 +17,7 @@ namespace PollCapstone.Models
         public bool IsPublic { get; set; }
         [Display(Name = "Number of Choices")]
         public int NumberOfChoices { get; set; }
+        public string JSONChoices { get; set; }
         [Display(Name = "Polling Status")]
         public string PollingStatus { get; set; }
         [Display(Name = "Poll Start Date")]

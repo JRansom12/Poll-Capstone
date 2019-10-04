@@ -56,7 +56,7 @@ namespace PollCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PickOneId,PollName,NumberOfChoices,IsPublic,PollingStatus,PollStartDate,PollCompletionDate,PollMaker")] PickOnePoll pickOnePoll)
+        public async Task<IActionResult> Create([Bind("PickOneId,PollName,NumberOfChoices,JSONChoices,IsPublic,PollingStatus,PollStartDate,PollCompletionDate,PollMaker")] PickOnePoll pickOnePoll)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace PollCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PickOneId,PollName,NumberOfChoices,IsPublic,PollMaker")] PickOnePoll pickOnePoll)
+        public async Task<IActionResult> Edit(int id, [Bind("PickOneId,PollName,NumberOfChoices,JSONChoices,IsPublic,PollingStatus,PollStartDate,PollCompletionDate,PollMaker")] PickOnePoll pickOnePoll)
         {
             if (id != pickOnePoll.PickOneId)
             {

@@ -1,3 +1,14 @@
 ﻿@{
-    Layout = "_Layout";
+    if (this.User.IsInRole("PollMaker"))
+    {
+        Layout = "_PollMakerLayout.cshtml";
+    }
+    else if (this.User.IsInRole("PollTaker"))
+    {
+        Layout = "_PollTakerLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }
