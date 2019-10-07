@@ -16,6 +16,7 @@ namespace PollCapstone.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public string Gender { get; set; }
+        public string Email { get; set; }
         public int Age { get; set; }
         [ForeignKey("User Id")]
         public string ApplicationUserId { get; set; }

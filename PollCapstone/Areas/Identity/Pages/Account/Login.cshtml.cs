@@ -9,19 +9,22 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using PollCapstone.Data;
 
 namespace PollCapstone.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, ApplicationDbContext context)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -77,7 +80,30 @@ namespace PollCapstone.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    var currentUser = _context.Users.FirstOrDefault(u => u.Email == Input.Email);
+
+
+                    var currentUserRoleIdObject = _context.UserRoles.Where(u => u.UserId == currentUser.Id).Single();
+                    var pollMakerRole = _context.Roles.FirstOrDefault(r => r.Name == "PollMaker");
+                    var pollTakerRole = _context.Roles.FirstOrDefault(r => r.Name == "PollTaker");
+                    var unassignedUserRole = _context.Roles.FirstOrDefault(r => r.Name == "UnassignedUser");
+                    if (currentUserRoleIdObject.RoleId == pollMakerRole.Id)
+                    {
+                        return RedirectToAction("Index", "PollMakers");
+                    }
+                    else if (currentUserRoleIdObject.RoleId == pollTakerRole.Id)
+                    {
+                        return RedirectToAction("Index", "PollTakers");
+                    }
+                    else if (currentUserRoleIdObject.RoleId == unassignedUserRole.Id)
+                    {
+                        return RedirectToAction("UserIndex", "Home");
+                    }
+
+
+
+
+                    //return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {

@@ -61,7 +61,7 @@ namespace PollCapstone.Controllers
             if (ModelState.IsValid)
             {
                 var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
-                //var currentPollMaker = _context.PollMaker.Where(c => c.ApplicationUserId == currentUserId).FirstOrDefault();
+                var currentPollMaker = _context.PollMaker.Where(c => c.ApplicationUserId == currentUserId).FirstOrDefault();
                 pickOnePoll.MakerId = currentUserId;
                 _context.Add(pickOnePoll);
                 await _context.SaveChangesAsync();

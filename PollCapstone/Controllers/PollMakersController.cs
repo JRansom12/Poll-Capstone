@@ -54,10 +54,13 @@ namespace PollCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MakerId,FirstName,LastName,Gender,Age,ApplicationUserId")] PollMaker pollMaker)
+        public async Task<IActionResult> Create([Bind("MakerId,FirstName,LastName,Gender,Age,ApplicationUserId")] PollMaker pollMaker, string id)
         {
             if (ModelState.IsValid)
             {
+                pollMaker.ApplicationUserId = id;
+                var currentUser = _context.Users.FirstOrDefault(u => u.Id == id);
+                pollMaker.Email = currentUser.Email;
                 _context.Add(pollMaker);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -75,8 +75,8 @@ namespace PollCapstone.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             UserRoles = new List<SelectListItem>()
             {
-                new SelectListItem { Value = "PollMaker", Text = "Poll Maker"},
-                new SelectListItem { Value = "PollTaker", Text = "Poll Taker"},
+                new SelectListItem { Value = "PollMaker", Text = "PollMaker"},
+                new SelectListItem { Value = "PollTaker", Text = "PollTaker"},
                 //new SelectListItem { Value = "UnassignedUser", Text = "UnassignedUser"},
             };
         }
@@ -92,14 +92,35 @@ namespace PollCapstone.Areas.Identity.Pages.Account
                 {
                     if (user.Role == "PollMaker")
                     {
-                        //await _userManager.AddToRoleAsync(user, StaticDetails.PollMaker);
+                        await _userManager.AddToRoleAsync(user, StaticDetails.PollMaker);
                         return RedirectToAction("Create", "Pollmakers", new { id = user.Id });
                     }
                     if (user.Role == "PollTaker")
                     {
-                        //await _userManager.AddToRoleAsync(user, StaticDetails.PollTaker);
+                        await _userManager.AddToRoleAsync(user, StaticDetails.PollTaker);
                         return RedirectToAction("Create", "PollTakers", new { id = user.Id });
                     }
+
+                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.AdminEndUser))
+                    //{
+                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminEndUser));
+                    //}
+                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.SuperAdminEndUser))
+                    //{
+                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.SuperAdminEndUser));
+                    //}
+                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.PollMaker))
+                    //{
+                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.PollMaker));
+                    //}
+                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.PollTaker))
+                    //{
+                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.PollTaker));
+                    //}
+                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.UnassignedUser))
+                    //{
+                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.UnassignedUser));
+                    //}
 
                     foreach (var error in result.Errors)
                     {
@@ -107,26 +128,6 @@ namespace PollCapstone.Areas.Identity.Pages.Account
                     }
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    //{
-                    //    _logger.LogInformation("User created a new account with password.");
-
-                    //    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //    var callbackUrl = Url.Page(
-                    //        "/Account/ConfirmEmail",
-                    //        pageHandler: null,
-                    //        values: new { userId = user.Id, code = code },
-                    //        protocol: Request.Scheme);
-
-                    //    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    //    await _signInManager.SignInAsync(user, isPersistent: false);
-                    //    return LocalRedirect(returnUrl);
-                    //}
-                    //foreach (var error in result.Errors)
-                    //{
-                    //    ModelState.AddModelError(string.Empty, error.Description);
-                    //}
                 }
             }
 
