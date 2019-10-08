@@ -101,27 +101,6 @@ namespace PollCapstone.Areas.Identity.Pages.Account
                         return RedirectToAction("Create", "PollTakers", new { id = user.Id });
                     }
 
-                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.AdminEndUser))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminEndUser));
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.SuperAdminEndUser))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.SuperAdminEndUser));
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.PollMaker))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.PollMaker));
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.PollTaker))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.PollTaker));
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(StaticDetails.UnassignedUser))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.UnassignedUser));
-                    //}
-
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error.Description);

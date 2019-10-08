@@ -152,5 +152,12 @@ namespace PollCapstone.Controllers
         {
             return _context.PollMaker.Any(e => e.MakerId == id);
         }
+
+
+        // GET: PollMakers/Create
+        public IActionResult CreatePoll()
+        {
+            return View();
+        }
     }
 }

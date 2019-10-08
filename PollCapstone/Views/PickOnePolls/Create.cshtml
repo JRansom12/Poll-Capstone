@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<br />
+
 <h1>Create</h1>
 
-<h4>Pick One Poll</h4>
+<h4>PickOnePoll</h4>
 <hr />
-
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -19,33 +20,40 @@
                 <input asp-for="PollName" class="form-control" />
                 <span asp-validation-for="PollName" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <label asp-for="NumberOfChoices" class="control-label"></label>
-                <input asp-for="NumberOfChoices" class="form-control" type="number" id="member" name="member" value="" />
-                <span asp-validation-for="NumberOfChoices" class="text-danger"></span>
-            </div>
-            <a href="#" id="filldetails" onclick="addFields()">Enter Choices</a>
-            <br />
-            <div id="container">
-            </div>
-            <br />
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsPublic" /> @Html.DisplayNameFor(model => model.IsPublic)
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" onclick="putFields"/>
+                <label asp-for="NumberOfChoices" class="control-label"></label>
+                <input asp-for="NumberOfChoices" class="form-control" type="number" id="member" name="member" value="" />
+                <span asp-validation-for="NumberOfChoices" class="text-danger"></span>
+            </div>
+            <a href="#" id="filldetails" class="text-dark" onclick="addFields()">Enter Choices</a>
+            <br />
+            <div id="container">
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="PollStartDate" class="control-label"></label>
+                <input asp-for="PollStartDate" class="form-control" />
+                <span asp-validation-for="PollStartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PollCompletionDate" class="control-label"></label>
+                <input asp-for="PollCompletionDate" class="form-control" />
+                <span asp-validation-for="PollCompletionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" onclick="putFields()" />
             </div>
         </form>
     </div>
 </div>
 
-<div class="row">
-   <a asp-action="Index">Back to List</a>
+<div class="btn btn-secondary">
+    <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

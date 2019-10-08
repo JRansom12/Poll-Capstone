@@ -48,6 +48,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    opacity: .80;
 }
 .footer {
   position: absolute;

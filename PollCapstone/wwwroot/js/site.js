@@ -8,11 +8,12 @@ function addFields() {
         container.removeChild(container.lastChild);
     }
     for (i = 0; i < number; i++) {
-        container.appendChild(document.createTextNode("Option " + (i + 1) + " "));
+        container.appendChild(document.createTextNode((i + 1) + " "));
         var input = document.createElement("input");
         input.type = "text";
         choiceArray.push(input);
         container.appendChild(input);
+        container.appendChild(document.createElement("br"));
         container.appendChild(document.createElement("br"));
     }
     decoyArray = choiceArray;
