@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PollCapstone.Models
 {
-    public class RankPoll : Poll
+    public class RankPoll : IPoll
     {
         [Key]
         public int RankId { get; set; }

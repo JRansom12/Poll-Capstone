@@ -24,5 +24,4 @@ function addFields() {
 function putFields() {
     var jsonString = JSON.stringify(decoyArray);
     console.log(decoyArray);
-    alert(jsonString);
 }

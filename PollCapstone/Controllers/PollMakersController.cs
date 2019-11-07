@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,6 +24,31 @@ namespace PollCapstone.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.PollMaker.ToListAsync());
+        }
+
+        public async Task<IActionResult> ViewHistoryPolls()
+        {
+            var todayDate = DateTime.Today;
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+            IEnumerable<IPoll> historyPickOnePolls = _context.PickOnePoll.Where(p => p.PollCompletionDate <= todayDate);
+            IEnumerable<IPoll> historyRankPolls = _context.RankPoll.Where(p => p.PollCompletionDate <= todayDate);
+            IEnumerable<IPoll> historySatisfactionPolls = _context.SatisfactionPoll.Where(p => p.PollCompletionDate <= todayDate);
+            IEnumerable<IPoll> historySurveyPolls = _context.SurveyPoll.Where(p => p.PollCompletionDate <= todayDate);
+            var historyPolls = historyPickOnePolls.Concat(historyRankPolls).Concat(historySatisfactionPolls).Concat(historySurveyPolls); ;
+            List<IPoll> historyPollList = historyPolls.ToList();
+            return View(historyPollList);
+        }
+        public async Task<IActionResult> ViewActivePolls()
+        {
+            var todayDate = DateTime.Today;
+            var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+            IEnumerable<IPoll> activePickOnePolls = _context.PickOnePoll.Where(p => p.PollCompletionDate >= todayDate && p.PollStartDate <= todayDate);
+            IEnumerable<IPoll> activeRankPolls = _context.RankPoll.Where(p => p.PollCompletionDate >= todayDate && p.PollStartDate <= todayDate);
+            IEnumerable<IPoll> activeSatisfactionPolls = _context.SatisfactionPoll.Where(p => p.PollCompletionDate >= todayDate && p.PollStartDate <= todayDate);
+            IEnumerable<IPoll> activeSurveyPolls = _context.SurveyPoll.Where(p => p.PollCompletionDate >= todayDate && p.PollStartDate <= todayDate);
+            var activePolls = activePickOnePolls.Concat(activeRankPolls).Concat(activeSatisfactionPolls).Concat(activeSurveyPolls);
+            List<IPoll> activePollList = activePolls.ToList();
+            return View(activePollList);
         }
 
         // GET: PollMakers/Details/5

@@ -90,6 +90,15 @@ namespace PollCapstone.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.PollMaker))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.PollMaker));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(StaticDetails.PollTaker))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.PollTaker));
+                    }
+
                     if (user.Role == "PollMaker")
                     {
                         await _userManager.AddToRoleAsync(user, StaticDetails.PollMaker);

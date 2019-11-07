@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace PollCapstone.Models
 {
-    public abstract class Poll
+    public interface IPoll
     {
         [Display(Name = "Poll Name")]
-        public string PollName { get; set; }
+        string PollName { get; set; }
         [Display(Name = "Is Public")]
-        public bool IsPublic { get; set; }
+        bool IsPublic { get; set; }
         [Display(Name = "Poll Start Date")]
         [DataType(DataType.Date)]
-        public DateTime PollStartDate { get; set; }
+        DateTime PollStartDate { get; set; }
         [Display(Name = "Poll Completion Date")]
         [DataType(DataType.Date)]
-        public DateTime PollCompletionDate { get; set; }
+        DateTime PollCompletionDate { get; set; }
     }
 }

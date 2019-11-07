@@ -1,20 +1,19 @@
-﻿@model PollCapstone.Models.PickOnePoll
+﻿@model PollCapstone.Models.RankPoll
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_PollMakerLayout.cshtml";
 }
 
-<br />
+<h1>Edit</h1>
 
-<h1>Create</h1>
-
-<h4>PickOnePoll</h4>
+<h4>RankPoll</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RankId" />
             <div class="form-group">
                 <label asp-for="PollName" class="control-label"></label>
                 <input asp-for="PollName" class="form-control" />
@@ -31,16 +30,15 @@
                 <span asp-validation-for="NumberOfChoices" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfChoices" class="control-label"></label>
-                <input asp-for="NumberOfChoices" class="form-control" type="number" id="member" name="member" value="" />
-                <span asp-validation-for="NumberOfChoices" class="text-danger"></span>
+                <label asp-for="JSONChoices" class="control-label"></label>
+                <input asp-for="JSONChoices" class="form-control" />
+                <span asp-validation-for="JSONChoices" class="text-danger"></span>
             </div>
-            <a href="#" id="filldetails" class="text-dark" onclick="addFields()">Enter Choices</a>
-            <br />
-            <div id="container">
+            <div class="form-group">
+                <label asp-for="PollingStatus" class="control-label"></label>
+                <input asp-for="PollingStatus" class="form-control" />
+                <span asp-validation-for="PollingStatus" class="text-danger"></span>
             </div>
-            <br />
-
             <div class="form-group">
                 <label asp-for="PollStartDate" class="control-label"></label>
                 <input asp-for="PollStartDate" class="form-control" />
@@ -52,13 +50,18 @@
                 <span asp-validation-for="PollCompletionDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" onclick="putFields()" />
+                <label asp-for="MakerId" class="control-label"></label>
+                <input asp-for="MakerId" class="form-control" />
+                <span asp-validation-for="MakerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div class="btn btn-secondary">
+<div>
     <a asp-action="Index">Back to List</a>
 </div>
 

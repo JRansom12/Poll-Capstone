@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,24 +10,22 @@ using PollCapstone.Models;
 
 namespace PollCapstone.Controllers
 {
-    public class PickOnePollsController : Controller
+    public class RankPollsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public PickOnePollsController(ApplicationDbContext context)
+        public RankPollsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: PickOnePolls
+        // GET: RankPolls
         public async Task<IActionResult> Index()
         {
-            var todayDate = DateTime.Today;
-            var publicPickOnePolls = _context.PickOnePoll.Where(p => p.IsPublic == true && p.PollStartDate <= todayDate && p.PollCompletionDate >= todayDate);
-            return View(await publicPickOnePolls.ToListAsync());
+            return View(await _context.RankPoll.ToListAsync());
         }
 
-        // GET: PickOnePolls/Details/5
+        // GET: RankPolls/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,47 +33,39 @@ namespace PollCapstone.Controllers
                 return NotFound();
             }
 
-            var pickOnePoll = await _context.PickOnePoll
-                .FirstOrDefaultAsync(m => m.PickOneId == id);
-            if (pickOnePoll == null)
+            var rankPoll = await _context.RankPoll
+                .FirstOrDefaultAsync(m => m.RankId == id);
+            if (rankPoll == null)
             {
                 return NotFound();
             }
 
-            return View(pickOnePoll);
+            return View(rankPoll);
         }
 
-        // GET: PickOnePolls/Create
+        // GET: RankPolls/Create
         public IActionResult Create()
         {
-            ViewData["MakerId"] = new SelectList(_context.PollMaker, "MakerId", "MakerId");
             return View();
         }
 
-        // POST: PickOnePolls/Create
+        // POST: RankPolls/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PickOneId,PollName,NumberOfChoices,JSONChoices,IsPublic,PollingStatus,PollStartDate,PollCompletionDate,PollMaker")] PickOnePoll pickOnePoll)
+        public async Task<IActionResult> Create([Bind("RankId,PollName,IsPublic,NumberOfChoices,JSONChoices,PollingStatus,PollStartDate,PollCompletionDate,MakerId")] RankPoll rankPoll)
         {
             if (ModelState.IsValid)
             {
-                var currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
-                var currentPollMaker = _context.PollMaker.Where(c => c.ApplicationUserId == currentUserId).FirstOrDefault();
-                pickOnePoll.MakerId = currentUserId;
-                _context.Add(pickOnePoll);
+                _context.Add(rankPoll);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(pickOnePoll);
+            return View(rankPoll);
         }
 
-
-
-
-
-        // GET: PickOnePolls/Edit/5
+        // GET: RankPolls/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,22 +73,22 @@ namespace PollCapstone.Controllers
                 return NotFound();
             }
 
-            var pickOnePoll = await _context.PickOnePoll.FindAsync(id);
-            if (pickOnePoll == null)
+            var rankPoll = await _context.RankPoll.FindAsync(id);
+            if (rankPoll == null)
             {
                 return NotFound();
             }
-            return View(pickOnePoll);
+            return View(rankPoll);
         }
 
-        // POST: PickOnePolls/Edit/5
+        // POST: RankPolls/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PickOneId,PollName,NumberOfChoices,JSONChoices,IsPublic,PollingStatus,PollStartDate,PollCompletionDate,PollMaker")] PickOnePoll pickOnePoll)
+        public async Task<IActionResult> Edit(int id, [Bind("RankId,PollName,IsPublic,NumberOfChoices,JSONChoices,PollingStatus,PollStartDate,PollCompletionDate,MakerId")] RankPoll rankPoll)
         {
-            if (id != pickOnePoll.PickOneId)
+            if (id != rankPoll.RankId)
             {
                 return NotFound();
             }
@@ -108,12 +97,12 @@ namespace PollCapstone.Controllers
             {
                 try
                 {
-                    _context.Update(pickOnePoll);
+                    _context.Update(rankPoll);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PickOnePollExists(pickOnePoll.PickOneId))
+                    if (!RankPollExists(rankPoll.RankId))
                     {
                         return NotFound();
                     }
@@ -124,10 +113,10 @@ namespace PollCapstone.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(pickOnePoll);
+            return View(rankPoll);
         }
 
-        // GET: PickOnePolls/Delete/5
+        // GET: RankPolls/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,30 +124,30 @@ namespace PollCapstone.Controllers
                 return NotFound();
             }
 
-            var pickOnePoll = await _context.PickOnePoll
-                .FirstOrDefaultAsync(m => m.PickOneId == id);
-            if (pickOnePoll == null)
+            var rankPoll = await _context.RankPoll
+                .FirstOrDefaultAsync(m => m.RankId == id);
+            if (rankPoll == null)
             {
                 return NotFound();
             }
 
-            return View(pickOnePoll);
+            return View(rankPoll);
         }
 
-        // POST: PickOnePolls/Delete/5
+        // POST: RankPolls/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pickOnePoll = await _context.PickOnePoll.FindAsync(id);
-            _context.PickOnePoll.Remove(pickOnePoll);
+            var rankPoll = await _context.RankPoll.FindAsync(id);
+            _context.RankPoll.Remove(rankPoll);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PickOnePollExists(int id)
+        private bool RankPollExists(int id)
         {
-            return _context.PickOnePoll.Any(e => e.PickOneId == id);
+            return _context.RankPoll.Any(e => e.RankId == id);
         }
     }
 }

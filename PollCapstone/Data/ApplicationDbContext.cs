@@ -24,5 +24,7 @@ namespace PollCapstone.Data
         public DbSet<PickOnePoll> PickOnePoll { get; set; }
 
         public DbSet<SurveyPoll> SurveyPoll { get; set; }
+
+        public DbSet<SatisfactionPoll> SatisfactionPoll { get; set; }
     }
 }

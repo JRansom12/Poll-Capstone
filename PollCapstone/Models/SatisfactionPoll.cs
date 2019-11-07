@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace PollCapstone.Models
 {
-    public class PickOnePoll : IPoll
+    public class SatisfactionPoll : Poll
     {
         [Key]
-        public int PickOneId { get; set; }
+        public int SurveyId { get; set; }
         [Display(Name = "Poll Name")]
         public string PollName { get; set; }
         [Display(Name = "Is Public")]
@@ -28,11 +28,5 @@ namespace PollCapstone.Models
         public DateTime PollCompletionDate { get; set; }
         [ForeignKey("PollMaker")]
         public string MakerId { get; set; }
-    }
-    public enum PollStatus
-    {
-        Pending,
-        Open,
-        Closed
     }
 }

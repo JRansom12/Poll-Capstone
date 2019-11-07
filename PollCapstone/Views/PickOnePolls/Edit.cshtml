@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_PollMakerLayout.cshtml";
 }
 
 <h1>Edit</h1>
@@ -19,15 +19,35 @@
                 <input asp-for="PollName" class="form-control" />
                 <span asp-validation-for="PollName" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPublic" /> @Html.DisplayNameFor(model => model.IsPublic)
+                </label>
+            </div>
             <div class="form-group">
                 <label asp-for="NumberOfChoices" class="control-label"></label>
                 <input asp-for="NumberOfChoices" class="form-control" />
                 <span asp-validation-for="NumberOfChoices" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsPublic" /> @Html.DisplayNameFor(model => model.IsPublic)
-                </label>
+            <div class="form-group">
+                <label asp-for="JSONChoices" class="control-label"></label>
+                <input asp-for="JSONChoices" class="form-control" />
+                <span asp-validation-for="JSONChoices" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PollingStatus" class="control-label"></label>
+                <input asp-for="PollingStatus" class="form-control" />
+                <span asp-validation-for="PollingStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PollStartDate" class="control-label"></label>
+                <input asp-for="PollStartDate" class="form-control" />
+                <span asp-validation-for="PollStartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PollCompletionDate" class="control-label"></label>
+                <input asp-for="PollCompletionDate" class="form-control" />
+                <span asp-validation-for="PollCompletionDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -40,6 +60,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
