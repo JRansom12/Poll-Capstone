@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "TakePoll";
+    Layout = "~/Views/Shared/_PollTakerLayout.cshtml";
+}
+
+<br />
+
+<body>
+    <center>
+        <div>
+            <h1>Polls You've Been Invited To</h1>
+            <h4><a href="@Url.Action("InvitedPolls", "PollTakers")">Take Here</a></h4>
+        </div>
+        <br />
+        <div>
+            <h1>Take A Public Poll</h1>
+            <h4><a href="@Url.Action("SearchPublicPolls", "PollTakers")">Search Here</a></h4>
+        </div>
+        <br />
+        <div>
+            <h1>View Polls</h1>
+            <h4><a href="@Url.Action("ViewHistory", "PollTakers")">View History Here</a></h4>
+        </div>
+        <br />
+    </center>
+</body>
+

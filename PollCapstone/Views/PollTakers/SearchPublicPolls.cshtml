@@ -1,0 +1,78 @@
+﻿@model IEnumerable<PollCapstone.Models.PickOnePoll>
+
+@{
+    ViewData["Title"] = "SearchPublicPolls";
+    Layout = "~/Views/Shared/_PollTakerLayout.cshtml";
+}
+
+<h1>SearchPublicPolls</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PollName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPublic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfChoices)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JSONChoices)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PollingStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PollStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PollCompletionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MakerId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PollName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPublic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfChoices)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JSONChoices)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PollingStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PollStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PollCompletionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MakerId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PickOneId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PickOneId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PickOneId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

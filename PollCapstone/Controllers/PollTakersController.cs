@@ -25,6 +25,18 @@ namespace PollCapstone.Controllers
             return View(await _context.PollTaker.ToListAsync());
         }
 
+        public IActionResult TakePoll()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> SearchPublicPolls()
+        {
+            var todayDate = DateTime.Today;
+            var publicPickOnePolls = _context.PickOnePoll.Where(p => p.IsPublic == true && p.PollStartDate <= todayDate && p.PollCompletionDate >= todayDate);
+            return View(await publicPickOnePolls.ToListAsync());
+        }
+
         // GET: PollTakers/Details/5
         public async Task<IActionResult> Details(int? id)
         {

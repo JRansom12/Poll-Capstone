@@ -93,7 +93,7 @@ namespace PollCapstone.Areas.Identity.Pages.Account
                     }
                     else if (currentUserRoleIdObject.RoleId == pollTakerRole.Id)
                     {
-                        return RedirectToAction("Index", "PollTakers");
+                        return RedirectToAction("TakePoll", "PollTakers");
                     }
                     else if (currentUserRoleIdObject.RoleId == unassignedUserRole.Id)
                     {
