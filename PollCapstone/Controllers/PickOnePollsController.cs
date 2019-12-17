@@ -72,10 +72,6 @@ namespace PollCapstone.Controllers
             return View(pickOnePoll);
         }
 
-
-
-
-
         // GET: PickOnePolls/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
