@@ -8,6 +8,8 @@ namespace PollCapstone.Models
 {
     public abstract class Poll
     {
+        [Key]
+        public int PollId { get; set; }
         [Display(Name = "Poll Name")]
         public string PollName { get; set; }
         [Display(Name = "Is Public")]

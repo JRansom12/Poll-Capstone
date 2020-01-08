@@ -32,15 +32,15 @@
             </div>
 
             @*<div class="form-group">
-                <label asp-for="NumberOfChoices" class="control-label"></label>
-                <input asp-for="NumberOfChoices" class="form-control" type="number" id="member" name="member" value="" />
-                <span asp-validation-for="NumberOfChoices" class="text-danger"></span>
-            </div>
-            <a href="#" id="filldetails" class="text-dark" onclick="addFields()">Enter Choices</a>
-            <br />
-            <div id="container">
-            </div>
-            <br />*@
+                    <label asp-for="NumberOfChoices" class="control-label"></label>
+                    <input asp-for="NumberOfChoices" class="form-control" type="number" id="member" name="member" value="" />
+                    <span asp-validation-for="NumberOfChoices" class="text-danger"></span>
+                </div>
+                <a href="#" id="filldetails" class="text-dark" onclick="addFields()">Enter Choices</a>
+                <br />
+                <div id="container">
+                </div>
+                <br />*@
 
             <div class="form-group">
                 <label asp-for="PollStartDate" class="control-label"></label>
@@ -53,6 +53,7 @@
                 <span asp-validation-for="PollCompletionDate" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a asp-action="Edit" asp-route-id="PickOneId">Edit</a>
                 <input type="submit" value="Create" class="btn btn-primary" onclick="putFields()" />
             </div>
         </form>

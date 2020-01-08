@@ -67,8 +67,15 @@ namespace PollCapstone.Controllers
                 pickOnePoll.MakerId = currentUserId;
                 _context.Add(pickOnePoll);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return View("AddChoices");
             }
+            return View(pickOnePoll);
+        }
+
+        public async Task<IActionResult> AddChoices(PickOnePoll pickOnePoll)
+        {
+            
             return View(pickOnePoll);
         }
 
